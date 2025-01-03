@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+
+// ===================== Dependency ==================
+//import './App.css';
+import { Routes, Route } from "react-router-dom";
+
+
+// ==================== Routes ========================
+import Login from "./routes/login/login.route";
+import DashboardRoute from "./routes/dashboard/dashboard.route";
+import Director from "./routes/director/director";
+import ProtectedRoute from './functions/auth/protectedRoutes';
+
+//===================== App ===========================
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+
+
+        <Route
+            path="/dashboard"
+            element={
+                <ProtectedRoute requiredAuth="serverVerify" redirectTo="/login">
+                    <DashboardRoute />
+                </ProtectedRoute>
+            }
+        />
+
+        <Route path="/" element={<Director />} />
+        <Route path="/login" element={<Login />} />
+    </Routes>
   );
 }
 
