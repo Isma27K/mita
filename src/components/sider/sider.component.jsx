@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
 import './sider.style.scss';
-import {Divider, notification} from 'antd';
+import {Divider, notification, Popconfirm} from 'antd';
 import logo from '../../assets/X.svg'
 import {useNavigate} from 'react-router-dom';
 import {UserContext} from '../../contexts/userContexts.js'
@@ -74,10 +74,19 @@ const SidePanel = ({ isCollapsed, onToggle }) => {
                         </a>
                     </li>
                     <li>
-                        <a className="sider-logout-activate-hover bottom-component" onClick={logout}>
-                            <span className="icon">👋</span>
-                            <span className="label">Logout</span>
-                        </a>
+                        <Popconfirm
+                            title="Logout Confirmation"
+                            description="Are you sure you want to logout?"
+                            onConfirm={logout}
+                            okText="Yes"
+                            cancelText="No"
+                            placement="topLeft"
+                        >
+                            <a className="sider-logout-activate-hover bottom-component">
+                                <span className="icon">👋</span>
+                                <span className="label">Logout</span>
+                            </a>
+                        </Popconfirm>
                     </li>
                 </ul>
             </nav>

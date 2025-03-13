@@ -16,7 +16,6 @@ const Login = () => {
         })
     }
 
-
     const handleUnameChange = (event) => {
         setUname(event.target.value);
         //console.log(uname);
@@ -26,11 +25,14 @@ const Login = () => {
         setPassword(event.target.value);
     }
 
-    const handleSubmit = async () => {
-
+    const handleSubmit = async (event) => {
+        // Prevent default form submission behavior
+        if (event) {
+            event.preventDefault();
+        }
 
         if (uname === "" || password === "") {
-            openNotification('error', 'Empty Filed', 'Dont Leave The Filed empty')
+            openNotification('error', 'Empty Field', 'Don\'t leave the fields empty')
             return;
         }
 
@@ -45,7 +47,6 @@ const Login = () => {
             })
         });
 
-
         const data = await result.json();
         //console.log(data);
 
@@ -53,7 +54,7 @@ const Login = () => {
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("refreshToken", data.refreshToken);
             navigate('/dashboard');
-        }else{
+        } else {
             // for testing
             openNotification('error', 'Wrong Credential', 'Please try again')
             //console.log(result);
@@ -63,7 +64,7 @@ const Login = () => {
     return (
         <div className='login-container'>
             <div className='login-inner-container'>
-                <div className='login-form'>
+                <form className='login-form' onSubmit={handleSubmit}>
                     <h1>Login</h1>
                     <label htmlFor="uname">Username</label>
                     <input
@@ -84,9 +85,13 @@ const Login = () => {
                         value={password}
                         onChange={handlePasswordChange}
                     />
-                    <button className="login-form login-form-gap" onClick={handleSubmit}>Login</button>
-                </div>
-
+                    <button
+                        type="submit"
+                        className="login-form login-form-gap"
+                    >
+                        Login
+                    </button>
+                </form>
             </div>
         </div>
     );
