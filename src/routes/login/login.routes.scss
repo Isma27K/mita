@@ -1,0 +1,84 @@
+// Define variables for the gradient colors
+$color1: #ff7e5f;
+$color2: #feb47b;
+$color3: #86a8e7;
+$color4: #91eae4;
+
+
+
+.login-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  .login-inner-container{
+    margin-top: 20vh;
+    width: 300px;
+    height: 325px;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 20px;
+
+    input{
+      height: 25px;
+      border: 1px solid black;
+      border-radius: 5px;
+      padding-left: 10px;
+    }
+
+    button {
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      border-radius: 5px;
+      background: linear-gradient(45deg, $color1, $color2, $color3, $color4);
+      background-size: 400% 400%;
+      transition: background 0.5s;
+      animation: aurora 10s ease infinite;
+      &:hover {
+        animation: aurora-hover 5s ease infinite;
+      }
+    }
+    @keyframes aurora {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes aurora-hover {
+      0% {
+        background-position: 50% 0%;
+      }
+      50% {
+        background-position: 50% 100%;
+      }
+      100% {
+        background-position: 50% 0%;
+      }
+    }
+
+    // configuration (something like BootStrap)
+
+    .login-form{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .login-form-gap{
+      margin-top: 20px;
+    }
+
+    .login-form-gap-small{
+      margin-top: 10px;
+    }
+  }
+}

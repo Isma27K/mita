@@ -1,0 +1,175 @@
+.side-panel {
+  background-color: white;
+  color: #000000;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: width 0.3s ease;
+  width: 250px;
+  z-index: 1000;
+  border-right: 1px solid black;
+
+  &.collapsed {
+    width: 60px;
+
+    .logo-icon{
+      display: none;
+    }
+
+    .logo span,
+    .label {
+      display: none;
+    }
+
+    // when user click to show where are
+    .activate{
+      background-color: whitesmoke;
+      border-radius: 10px;
+      border: none;
+
+      .icon{
+        //background-color: rgba(0, 191, 255, 0.58);
+        border: none;
+        padding: 8px;
+        border-radius: 5px;
+      }
+    }
+
+    .bottom-component{
+      width: 20px;
+      margin-left: -30;
+      position: fixed;
+
+      .icon{
+        padding: 0;
+      }
+    }
+
+    .sider-logout-activate-hover:hover{
+      border: 1px solid transparent;
+      .icon{
+        border: none;
+      }
+    }
+
+    .side-panel-nav {
+      a {
+        justify-content: center;
+        padding: 12px;
+        cursor: pointer;
+        &:hover {
+          background-color: transparent;
+        }
+      }
+
+      .icon {
+        margin: 0;
+      }
+    }
+  }
+
+  &-header {
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    padding: 0 15px;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .collapse-btn {
+      background: none;
+      border: none;
+      color: #000000;
+      cursor: pointer;
+      padding: 5px 10px;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+      }
+    }
+  }
+
+  &-nav {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        padding-left: 20px;
+        padding-right: 20px;
+        a {
+          align-items: center;
+          color: #000000;
+          display: flex;
+          padding: 12px 15px;
+          text-decoration: none;
+          transition: background-color 0.2s;
+          cursor: pointer;
+          margin-top: 5px;
+          border: 1px solid transparent;
+
+          &:hover {
+            background-color: rgba(101, 97, 97, 0.06);
+            border-radius: 10px;
+            border: 1px solid transparent;
+          }
+
+          .icon {
+            margin-right: 12px;
+            padding: 8px;
+          }
+        }
+
+        // when user click to show where are
+        .activate{
+          background-color: whitesmoke;
+          border-radius: 10px;
+          border: 1px solid black;
+          box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.22);
+
+          .icon{
+            //background-color: rgba(0, 191, 255, 0.58);
+            border: 1px solid black;
+            padding: 8px;
+            border-radius: 5px;
+          }
+        }
+
+        .sider-logout-activate-hover:hover {
+          background-color: whitesmoke;
+          border-radius: 10px;
+          border: 1px solid black;
+
+          .icon{
+            //background-color: rgba(0, 191, 255, 0.58);
+            border: 1px solid black;
+            //padding: 8px;
+            border-radius: 5px;
+          }
+        }
+
+        .bottom-component {
+          position: absolute; /* or absolute, depending on your needs */
+          bottom: 0;
+          width: 180px;
+          margin-bottom: 20px;
+          //width: 100%; /* Ensure it spans the full width of the screen */
+          //box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Optional, for a shadow effect */
+        }
+
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@
 // ===================== Dependency ==================
 //import './App.css';
 import { Routes, Route } from "react-router-dom";
+import {UserProvider} from './contexts/userContexts.js'
 
 
 // ==================== Routes ========================
@@ -14,21 +15,21 @@ import ProtectedRoute from './functions/auth/protectedRoutes';
 
 function App() {
   return (
-    <Routes>
+      <UserProvider>
+          <Routes>
+              <Route
+                  path="/dashboard"
+                  element={
+                      <ProtectedRoute requiredAuth="serverVerify" redirectTo="/login">
+                          <DashboardRoute />
+                      </ProtectedRoute>
+                  }
+              />
 
-
-        <Route
-            path="/dashboard"
-            element={
-                <ProtectedRoute requiredAuth="serverVerify" redirectTo="/login">
-                    <DashboardRoute />
-                </ProtectedRoute>
-            }
-        />
-
-        <Route path="/" element={<Director />} />
-        <Route path="/login" element={<Login />} />
-    </Routes>
+              <Route path="/" element={<Director />} />
+              <Route path="/login" element={<Login />} />
+          </Routes>
+      </UserProvider>
   );
 }
 

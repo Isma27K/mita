@@ -1,0 +1,17 @@
+
+// to fix the loading to center
+
+.director-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .director-loading{
+    margin-top: 20vh;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+}
+
+

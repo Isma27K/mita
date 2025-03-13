@@ -1,39 +1,34 @@
-import { useNavigation } from "react-router-dom";
-import {BASE_SERVER_URL} from '../../utils/env.js';
-//import { notification } from 'andt';
+// refreshToken.js
+import { BASE_SERVER_URL } from '../../utils/env.js';
 
-
-
-const ReToken = async ()  => {
-    const nav = useNavigation();
+const ReToken = async () => {
     const localRefreshToken = localStorage.getItem("refreshToken");
 
-    try{
+    try {
         const result = await fetch(`${BASE_SERVER_URL}/api/v1/refresh`, {
             method: "POST",
             body: JSON.stringify({
                 refresh_token: localRefreshToken,
-            })
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
-        result.accessToken = undefined;
-        result.refreshToken = undefined;
 
-        // store access and refresh token and navigate to dashboard
+        const data = await result.json();
+
         if (result.ok) {
-
-            localStorage.setItem("accessToken", result.accessToken);
-            localStorage.setItem("refreshToken", result.refreshToken);
-
-            // we continue
-
-        }else if (result.status === 401) {
-            nav('/login');
+            localStorage.setItem("accessToken", data.accessToken);
+            localStorage.setItem("refreshToken", data.refreshToken);
+            console.log(data);
+            return true;
+        } else {
+            return false;
         }
-
-    }catch(err){
+    } catch (err) {
         console.log(err);
+        return false;
     }
-
-}
+};
 
 export default ReToken;

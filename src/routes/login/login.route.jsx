@@ -2,15 +2,24 @@ import React, {useState} from 'react';
 import './login.routes.scss';
 import { useNavigate } from 'react-router-dom';
 import { BASE_SERVER_URL } from '../../utils/env.js';
+import { notification } from "antd";
 
 const Login = () => {
     const navigate = useNavigate();
     const [uname, setUname] = useState('');
     const [password, setPassword] = useState('');
 
+    const openNotification = (type, message, description) => {
+        notification[type]({
+            message,
+            description,
+        })
+    }
+
+
     const handleUnameChange = (event) => {
         setUname(event.target.value);
-        console.log(uname);
+        //console.log(uname);
     };
 
     const handlePasswordChange = (event) => {
@@ -18,6 +27,13 @@ const Login = () => {
     }
 
     const handleSubmit = async () => {
+
+
+        if (uname === "" || password === "") {
+            openNotification('error', 'Empty Filed', 'Dont Leave The Filed empty')
+            return;
+        }
+
         const result = await fetch(`${BASE_SERVER_URL}/api/v1/login`, {
             method: 'POST',
             headers: {
@@ -31,7 +47,7 @@ const Login = () => {
 
 
         const data = await result.json();
-        console.log(data);
+        //console.log(data);
 
         if (result.ok) {
             localStorage.setItem("accessToken", data.accessToken);
@@ -39,16 +55,19 @@ const Login = () => {
             navigate('/dashboard');
         }else{
             // for testing
-            console.log(result);
+            openNotification('error', 'Wrong Credential', 'Please try again')
+            //console.log(result);
         }
     }
 
     return (
         <div className='login-container'>
             <div className='login-inner-container'>
-                <form>
+                <div className='login-form'>
+                    <h1>Login</h1>
                     <label htmlFor="uname">Username</label>
                     <input
+                        className="login-form-gap-small"
                         type="text"
                         name="uname"
                         id="uname"
@@ -56,16 +75,18 @@ const Login = () => {
                         onChange={handleUnameChange}
                     />
 
-                    <label htmlFor="password">Password</label>
+                    <label className="login-form-gap" htmlFor="password">Password</label>
                     <input
+                        className="login-form-gap-small"
                         type="password"
                         name="password"
                         id="password"
                         value={password}
                         onChange={handlePasswordChange}
                     />
-                </form>
-                <button onClick={handleSubmit}>Login</button>
+                    <button className="login-form login-form-gap" onClick={handleSubmit}>Login</button>
+                </div>
+
             </div>
         </div>
     );
